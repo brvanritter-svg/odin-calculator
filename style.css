@@ -1,43 +1,43 @@
 body {
-    background-color: lightgreen;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    
 }
+
 
 
 #main {
-    background-color: gray;
-    width: 24rem;
-    margin: 20px 0;
+    background-color: black;
+    width: 20rem;
+    margin: 20px;
     border-radius: 48px;
     align-items: center;
     display: flex;
-    box-shadow: -10px 10px 10px dimgray;
     flex-direction: column;
+
 }
 
 #main-screen {
-    background-color: white;
-    width: 70%;
-    padding: 20px;
-    height: 2rem;
-    align-items: center;
+    width: 85%;
     justify-content: end;
     display: flex;
+    
     border-radius: 48px;
     font-weight: bold;
-    margin: 50px;
-    box-shadow: -10px 10px 10px dimgray;
+    margin-top: 100px;
+    color: white;
+    font-size: 32px;
 }
 
 #button-screen {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
-    gap: 5%;
-    padding: 32px 0;
+    width: 100%;
+    padding: 16px 0 32px 0;
+    justify-content: center;
 }
 
 
@@ -46,16 +46,32 @@ body {
     background-color: transparent;
     color: whitesmoke;
     width: 20%;
-    
-    height: 69.1166px;
+    font-family: 'Inter';
+    font-weight: bolder;
+    font-size: 24px;
+    height: 64px;
     align-content: center;
     text-align: center;
-    font-size: 20px;
     border: none;
+    margin: 5px;
+    transition: background-color 100ms ease-out;
+    transition: filter 100ms ease-out;
+    transition: color 100ms ease;
 }
 
-.func {
-    color: lightgreen;
-    font-weight: bold;
-    font-size: 30px;
+#zero {
+    width: 138px;
+}
+
+
+.button{
+    background-color: #1c1c1c;
+}
+.right {
+    background-color: orange;
+    font-size: xx-large;
+}
+.top {
+    background-color: gray;
+    color: black;
 }
