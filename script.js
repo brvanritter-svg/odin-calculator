@@ -13,16 +13,11 @@ function multiply(num1,num2) {
 function divide(num1,num2) {
     num1/num2
 }
-
-function operator(num1, operator, num2) {
-        
-}
-
 function percentage(number){
     return number / 100
 }
 
-
+let operator = '';
 
 const mainScreen = document.querySelector('#main-screen');
 const buttons = document.querySelectorAll(".button");
@@ -30,7 +25,7 @@ const numbers = document.querySelectorAll(".num");
 const clear = document.querySelector("#AC");
 const rightFunctionButtons = document.querySelectorAll(".right");
 const functionButtons = document.querySelectorAll(".func")
-
+const buttonScreen = document.querySelector('#button-screen')
 
 
 
@@ -40,6 +35,18 @@ rightFunctionButtons.forEach(button =>
         element.target.style.backgroundColor = 'white';
         element.target.style.color = 'orange';
 }));
+// reset style
+
+buttons.forEach ((button) =>
+    button.addEventListener('click', (event)=> {
+        if (!Array.from(rightFunctionButtons).includes(button)) {
+            rightFunctionButtons.forEach((element) => {
+                element.style.backgroundColor = 'orange';
+                element.style.color = 'white';
+            })
+        }
+    }))
+
 /*
 buttons.forEach(button => 
     button.addEventListener("mouseleave", (element) => 
@@ -97,6 +104,16 @@ functionButtons.forEach (button => {
                 text = textArray.join('');
                 return [text, mainScreen.textContent = text, console.log(text)];
             }
+        }else if ( button.textContent == '÷') {
+
+        }else if (button.textContent == '×') {
+
+        }else if (button.textContent == '-') {
+
+        }else if (button.textContent == '+') {
+
+        }else if (button.textContent == '=') {
+
         }
 
     })
