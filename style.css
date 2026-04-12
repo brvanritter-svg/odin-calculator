@@ -24,7 +24,7 @@ body {
     width: 85%;
     justify-content: end;
     display: flex;
-    
+    user-select: none;
     border-radius: 48px;
     font-weight: bold;
     margin-top: 100px;

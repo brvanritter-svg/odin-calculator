@@ -59,8 +59,35 @@ function numberInputHandler(value) {
     return mainScreen.textContent = text;
 }
 
+// Remove the last input number
+function removeLast() {
+        textArray = mainScreen.textContent.split('');
+        textArray.pop();
+        text = textArray.join('');
+
+        // if last number removed return display to 0
+        if (textArray.length == 0) {
+            text = '0'
+            return mainScreen.textContent = text
+        }
+
+        return [mainScreen.textContent = text,console.log(textArray)]
+}
+
 //Mouse click events
 numberButtons.forEach(button => button.addEventListener('click', () => numberInputHandler(button.textContent)))
+
+//Click-drag delete
+mainScreen.addEventListener('mousedown', (event1) =>{
+    let startX = event1.clientX;
+    document.addEventListener('mouseup', (event2) => {
+        let endX = event2.clientX;
+        if (startX > endX) {
+            removeLast();
+        }
+    }, {once: true})
+})
+
 
 
 
@@ -75,18 +102,5 @@ document.addEventListener('keydown', event => {
 })
 
     //delete last number with backspace key
-document.addEventListener('keydown', event => {
-    if (event.key == 'Backspace') {
-        textArray = mainScreen.textContent.split('');
-        textArray.pop();
-        text = textArray.join('');
+document.addEventListener('keydown', event => event.key == 'Backspace' ? removeLast() : null)
 
-        // if last number removed return display to 0
-        if (textArray.length == 0) {
-            text = '0'
-            return mainScreen.textContent = text
-        }
-
-        return [mainScreen.textContent = text,console.log(textArray)]
-    }
-})
