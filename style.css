@@ -54,6 +54,7 @@ body {
     text-align: center;
     border: none;
     margin: 5px;
+    -webkit-appearance: none;
     transition: background-color 100ms ease-out;
     transition: filter 100ms ease-out;
     transition: color 100ms ease;
