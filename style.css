@@ -50,10 +50,16 @@ body {
     font-weight: bolder;
     font-size: 24px;
     height: 64px;
+    padding: 0;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
     align-content: center;
     text-align: center;
     border: none;
     margin: 5px;
+    appearance: none;
+    -webkit-appearance: none;
     transition: background-color 100ms ease-out;
     transition: filter 100ms ease-out;
     transition: color 100ms ease;

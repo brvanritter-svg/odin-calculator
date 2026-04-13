@@ -8,6 +8,7 @@ const numberButtons = document.querySelectorAll ('.num');
 let text = mainScreen.textContent;
 let number1 = '';
 let number2 = '';
+let operator;
 
 function percentage(number) {
     return number / 100;    
@@ -26,7 +27,33 @@ function negativePositive() {
     }
 }
 
+function divide (num1,num2) {
+    if(num2 == 0) {
+        return "ERROR"
+    }
+    return num1 / num2
+}
+function multiply (num1,num2) {
+    return num1 * num2
+}
+function subtract (num1,num2) {
+    return num1 - num2 
+}
+function addition (num1,num2) {
+    return num1 + num2
+}
 
+function calculate(num1,operator,num2) {
+    if (operator == '÷') {
+        return divide(num1,num2)
+    }else if (operator == '×') {
+        return multiply(num1,num2)
+    }else if (operator == '-') {
+        return subtract(num1,num2)
+    }else if (operator == '+') {
+        return addition(num1,num2)
+    }
+}
 
 
 
@@ -106,7 +133,8 @@ function functionButtonsInputHandler(value) {
     value = value.toLowerCase()
     if (value == 'c') {
         text = '0';
-
+        console.log(number1)
+        console.log(number2)
         rightFunctionButtons.forEach (button => {button.style.background ='orange'; button.style.color = 'white';})
 
         return mainScreen.textContent = text;
@@ -121,9 +149,14 @@ function functionButtonsInputHandler(value) {
     let operators = '÷×-+'
 
     if (operators.includes(value)) {
-        return [number1 = text, text=''];
+        return [number1 = text, text='',operator = value];
     }else if (value == '=' && number1 != '' ) {
-        return [number2 = text,text='']
+        number2 = text
+        number1 = Number(number1);
+        number2 = Number(number2);
+        final = calculate(number1,operator,number2)
+        text = String(final);
+        return [mainScreen.textContent = text, text, number1='',number2='', operator ='']
     }
 }
 
