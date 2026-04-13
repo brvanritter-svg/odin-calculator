@@ -6,6 +6,25 @@ const rightFunctionButtons = document.querySelectorAll('.right');
 const numberButtons = document.querySelectorAll ('.num');
 
 let text = mainScreen.textContent;
+let number1 = '';
+let number2 = '';
+
+function percentage(number) {
+    return number / 100;    
+}
+
+function negativePositive() {
+    textArray = mainScreen.textContent.split('');
+    if (textArray[0] == '-') {
+        textArray.splice(0,1);
+        text = textArray.join("");
+        return mainScreen.textContent = text;
+    }else {
+        textArray.splice(0,0,'-');
+        text = textArray.join("");
+        return mainScreen.textContent = text;
+    }
+}
 
 
 
@@ -33,8 +52,27 @@ AllButtons.forEach(button =>
     }
 )
 
+rightFunctionButtons.forEach(button => {
+    button.addEventListener('click', element => {
+        
+        if (button.textContent != '=') {
+        button.style.backgroundColor = 'white';
+        button.style.color = 'orange';
+        }
+        let current = button.textContent;
+        
+
+        rightFunctionButtons.forEach(button => {
+            if (button.textContent != current) {
+                button.style.backgroundColor = 'orange';
+                button.style.color = 'white';
+            }
+        })
+    })
+})
 
 
+// Button input
 function numberInputHandler(value) {
     /*
     Split text into an array then look if the number is 0,
@@ -53,10 +91,40 @@ function numberInputHandler(value) {
         return
     }
 
+    if (mainScreen.textContent.includes('-') && textArray[1] == '0' && value!= '.' && textArray[2] != '.') {
+        let filteredArray = textArray.filter((element) => element !== '0');
+        text = filteredArray.join('');
+    }
+
 
     text += value;
                 
     return mainScreen.textContent = text;
+}
+
+function functionButtonsInputHandler(value) {
+    value = value.toLowerCase()
+    if (value == 'c') {
+        text = '0';
+
+        rightFunctionButtons.forEach (button => {button.style.background ='orange'; button.style.color = 'white';})
+
+        return mainScreen.textContent = text;
+    }
+    if (value == '%') {
+        return mainScreen.textContent = percentage(Number(mainScreen.textContent));
+    }
+    if (value == '+/-'){
+        negativePositive();
+    }
+    
+    let operators = '÷×-+'
+
+    if (operators.includes(value)) {
+        return [number1 = text, text=''];
+    }else if (value == '=' && number1 != '' ) {
+        return [number2 = text,text='']
+    }
 }
 
 // Remove the last input number
@@ -74,10 +142,18 @@ function removeLast() {
         return [mainScreen.textContent = text,console.log(textArray)]
 }
 
-//Mouse click events
-numberButtons.forEach(button => button.addEventListener('click', () => numberInputHandler(button.textContent)))
 
-//Click-drag delete
+
+
+
+
+//**Mouse click events**
+numberButtons.forEach(button => button.addEventListener('click', () => {
+    numberInputHandler(button.textContent);
+    rightFunctionButtons.forEach(button => {button.style.backgroundColor = 'orange'; button.style.color = 'white'})
+}));
+
+    //Click-drag delete
 mainScreen.addEventListener('mousedown', (event1) =>{
     let startX = event1.clientX;
     document.addEventListener('mouseup', (event2) => {
@@ -88,10 +164,13 @@ mainScreen.addEventListener('mousedown', (event1) =>{
     }, {once: true})
 })
 
+functionButtons.forEach(button => button.addEventListener('click', () => functionButtonsInputHandler(button.textContent)));
 
 
 
-//Keyboard press events
+
+
+//**Keyboard press events**
 
     //number input with keyboard
 document.addEventListener('keydown', event => {
@@ -104,3 +183,9 @@ document.addEventListener('keydown', event => {
     //delete last number with backspace key
 document.addEventListener('keydown', event => event.key == 'Backspace' ? removeLast() : null)
 
+document.addEventListener('keydown', (event)=> {
+    let keys = 'c%'
+    if (keys.includes(event.key)) {
+        functionButtonsInputHandler(event.key);
+    }
+})
